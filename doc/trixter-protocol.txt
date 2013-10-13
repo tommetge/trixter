@@ -1,0 +1,66 @@
+sample output line (32 bytes):
+
+a788032fcffffffffff0000fffe00a26
+
+bits that change:
+
+seat:
+ON: 19th and 31st (a788032fcfffffffff70000fffe00aa6)
+CHANGE: 19th from f->7
+
+left gear up:
+ON: 16th and 30th (a788032fcffffff7fff0000fffe00226)
+CHANGE: 16th from f->7
+
+left gear down:
+ON: 18th and 30th (a788032fcffffffff7f0000fffe00226)
+CHANGE: 18th from f->7
+
+left control panel up:
+ON: 17th and 31st (a788032fcfffffffeff0000fffe00a36)
+CHANGE: 17th from f->e
+
+left control panel left:
+ON: 16th and 30th (a788032fcffffffefff0000fffe00b26)
+CHANGE: 16th from f->e
+
+left control panel down:
+ON: 17th and 31st (a788032fcfffffffbff0000fffe00a66)
+CHANGE: 17th from f->b
+
+left control panel right:
+ON: 16th and 30th (a788032fcffffffbfff0000fffe00e26)
+CHANGE: 16th from f->b
+
+right control panel left:
+ON: 17th and 31st (a788032fcfffffffdff0000fffe00a06)
+CHANGE: 17th from f->d
+
+right control panel top:
+ON: 16th and 30th (a788032fcffffffdfff0000fffe00826)
+CHANGE: 16th from f->d
+
+right control panel right:
+ON: 17th and 31st (a788032fcfffffff7ff0000fffe00aa6)
+CHANGE: 17th from f->7
+
+right gear up:
+ON: 18th and 30th (a788032fcffffffffdf0000fffe00826)
+CHANGE: 18th from f->d
+
+right gear down:
+ON: 18th and 30th (a788032fcffffffffbf0000fffe00e26)
+CHANGE: 18th from f->b
+
+left brake:
+ON: 10,11 and 30,31
+
+right brake:
+ON: 8,9,11 and 30,31
+
+fly:
+TIME BETWEEN READ (1 rotation): 24,25,26,27 and 30,31 (a78800afcffffffffff0000fffe009a6)
+* appears to timeout after 6 seconds (reverting back to fffe, 9a)
+
+crank:
+POSITION: 6,7 (spans 01-3c, 01 corresponds to right pedal down)

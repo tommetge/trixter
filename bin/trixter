@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require 'trixter'
+
+port = ARGV[0]
+if port == nil
+  port = '/dev/tty.usbserial'
+end
+trix = Trixter.new(port)
+trix.run
+trix.join
