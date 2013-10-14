@@ -6,12 +6,16 @@ require 'trixter/difficulties'
 require 'trixter/event'
 
 class Trixter < EventHandler
+  attr_accessor :current_rpms
+  attr_accessor :current_difficulty
+
   def initialize(port)
     super()
 
     @port = SerialPort.new(port, 115200, 8, 1)
     @status_thread = nil
     @control_thread = nil
+    @current_rpms = 0
     @current_difficulty = 0
     @saved_difficulty = 0
     @right_brake = false
@@ -51,6 +55,10 @@ class Trixter < EventHandler
       @current_difficulty = 0
     end
     puts "Decreased difficulty to level #{@current_difficulty}"
+  end
+
+  def crankSpeedChanged(rpms)
+    @current_rpms = rpms
   end
 
   def leftBrakeChanged(strength)
@@ -102,10 +110,6 @@ class Trixter < EventHandler
     units = 100.0/span
     new_difficulty = (pressure/units).to_i + @saved_difficulty
     @current_difficulty = [new_difficulty, Difficulties.size - 1].min
-  end
-
-  def crankPositionChanged(event)
-    # pass
   end
 
   def status

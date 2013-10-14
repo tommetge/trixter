@@ -114,13 +114,17 @@ class EventHandler
     first_change = @crank_changes.first
 
     if event.time - first_change.time == 0
-      puts "Crank RPM: 0"
+      crankSpeedChanged(0)
     else
       rpms = (smoothed_ticks/60.0) * (60.0/(event.time - first_change.time))
-      puts "Crank RPM: #{rpms}"
+      crankSpeedChanged(rpms)
     end  
     
     @last_crank_change = event.time
+  end
+
+  def crankSpeedChanged(rpms)
+    puts "Crank RPM: #{rpms}"
   end
 
   def leftBrakeChanged(strength)
