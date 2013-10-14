@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'trixter'
-  s.version     = '1.0.0'
+  s.version     = '1.0.1'
   s.date        = '2013-10-13'
   s.summary     = "Trixter Dream Bike Controller"
   s.description = "Turns the Trixter Dream Bike into a real training platform"
@@ -17,4 +17,5 @@ Gem::Specification.new do |s|
   s.homepage    =
     'http://www.accident-prone.com'
   s.license       = 'MIT'
+  s.add_runtime_dependency ('serialport')
 end
