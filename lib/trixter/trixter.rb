@@ -12,7 +12,10 @@ class Trixter < EventHandler
   def initialize(port)
     super()
 
-    @port = SerialPort.new(port, 115200, 8, 1)
+    if (File.exists? port)
+      @port = SerialPort.new(port, 115200, 8, 1)
+    end
+
     @status_thread = nil
     @control_thread = nil
     @current_rpms = 0
@@ -27,6 +30,8 @@ class Trixter < EventHandler
   def run
     return if @should_run or @status_thread != nil
     return if @should_run or @control_thread != nil
+    return if ENV['NOBIKE']
+    return if @port == nil
 
     @should_run = true
     @status_thread = Thread.new do
@@ -39,6 +44,10 @@ class Trixter < EventHandler
 
   def stop
     @should_run = false
+  end
+
+  def running
+    return @should_run
   end
 
   def rightGearUp
