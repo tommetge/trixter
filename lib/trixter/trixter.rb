@@ -121,6 +121,13 @@ class Trixter < EventHandler
     @current_difficulty = [new_difficulty, Difficulties.size - 1].min
   end
 
+  def setDifficulty(difficulty)
+    difficulty = Difficulties.size - 1 if difficulty >= Difficulties.size
+    difficulty = 0 if difficulty < 0
+
+    @saved_difficulty = @current_difficulty = difficulty
+  end
+
   def status
     while @should_run
       raw_event = ""
