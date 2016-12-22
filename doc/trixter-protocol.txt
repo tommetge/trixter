@@ -61,6 +61,12 @@ ON: 8,9,11 and 30,31
 fly:
 TIME BETWEEN READ (1 rotation): 24,25,26,27 and 30,31 (a78800afcffffffffff0000fffe009a6)
 * appears to timeout after 6 seconds (reverting back to fffe, 9a)
+SPEED: 24,25,26,27: fffe is no motion, 0 is max (descends from there)
 
 crank:
 POSITION: 6,7 (spans 01-3c, 01 corresponds to right pedal down)
+SPEED: 20,21,22,23: 0 is no motion, ffff is minimum
+
+tilt:
+BYTES: 2,3 (spans 00-ff, 00 corresponds to full left tilt)
+NOTE: right brake bleeds a bit when tilting

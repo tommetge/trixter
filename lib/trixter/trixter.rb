@@ -132,16 +132,42 @@ class Trixter < EventHandler
     while @should_run
       raw_event = ""
       while true
-        raw_event << @port.read(1).strip
-        if raw_event.size == 1
-          raw_event = "" unless raw_event[0] == '6'
-        elsif raw_event.size == 2
-          raw_event == "" unless raw_event[1] == 'a'
-        elsif raw_event.size > 2
-          raw_event == "" unless raw_event[0..1] == '6a'
+        if raw_event.size == 0
+          # Find the start sequence ('6a')
+          while raw_event[0] != '6'
+            raw_event = @port.read(1)
+          end
+
+          raw_event << @port.read(1)
+          if raw_event[0..1] != '6a'
+            raw_event = ""
+            next
+          end
         end
-        break if raw_event.size == 32
+
+        # We may have an incorrect boundary if the event
+        # string has multiple "6a" sequences. If we see
+        # multiple start sequences before we hit our fixed
+        # length (32 bytes), discard, reset at that new
+        # offset, and try to fill our event again.
+        while raw_event.size < 32
+          if raw_event.scan('6a').count > 1
+            # reset and try again
+            raw_event = "6a"
+            next
+          end
+
+          if raw_event.scan('6a').count == 0
+            raw_event = ""
+            next
+          end
+
+          raw_event << @port.read(1)
+        end
+
+        break
       end
+
       handleEvent(Event.new(raw_event))
     end
   end
